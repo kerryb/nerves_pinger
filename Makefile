@@ -1,5 +1,5 @@
-.PHONY: setup burn assets firmware burn
-all: build burn
+.PHONY: setup burn assets firmware burn upload
+all: build upload
 setup:
 	cd ui && \
 	  mix deps.get && \
@@ -20,3 +20,7 @@ burn:
 	export MIX_TARGET=rpi2 && \
 	  cd firmware && \
 	  mix firmware.burn
+upload:
+	export MIX_TARGET=rpi2 && \
+	  cd firmware && \
+	  ./upload.sh
