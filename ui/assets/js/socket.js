@@ -6,23 +6,20 @@ socket.connect()
 
 let channel = socket.channel("results", {})
 
+function createCell(text) {
+  var cell = document.createElement("td")
+  cell.appendChild(document.createTextNode(text))
+  return cell
+}
+
 channel.on("new_result", payload => {
-  console.log(payload)
   var id = `${payload.type}-${payload.address}`
   var row = document.createElement("tr")
   row.id = id
-  var typeCell = document.createElement("td")
-  typeCell.appendChild(document.createTextNode(payload.type))
-  row.appendChild(typeCell)
-  var addressCell = document.createElement("td")
-  addressCell.appendChild(document.createTextNode(payload.address))
-  row.appendChild(addressCell)
-  var statusCell = document.createElement("td")
-  statusCell.appendChild(document.createTextNode(payload.status))
-  row.appendChild(statusCell)
-  var timeCell = document.createElement("td")
-  timeCell.appendChild(document.createTextNode(payload.time))
-  row.appendChild(timeCell)
+  row.appendChild(createCell(payload.type))
+  row.appendChild(createCell(payload.address))
+  row.appendChild(createCell(payload.status))
+  row.appendChild(createCell(payload.time))
   var table = document.getElementById("results-table")
   table.appendChild(row)
 })
