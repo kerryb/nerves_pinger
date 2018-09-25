@@ -26,6 +26,6 @@ defmodule Pinger do
   end
 
   defp http_request(url) do
-    HTTPoison.get(url)
+    HTTPoison.get(url, [], hackney: [insecure: true])
   end
 end
