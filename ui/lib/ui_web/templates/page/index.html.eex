@@ -5,9 +5,9 @@
     <th>Status</th>
     <th>Time (ms)</th>
   </thead>
-  <tbody>
+  <tbody id="results-table">
     <%= for {check, {status, time}} <- @results do %>
-      <tr>
+      <tr id="#{check.type}-#{check.address}">
         <td><%= check.type %></td>
         <td><%= check.address %></td>
         <td><%= status %></td>

@@ -12,7 +12,7 @@ defmodule UiWeb.ResultChannel do
       type: check.type,
       address: check.address,
       status: status,
-      time: time
+      time: trunc(time)
     })
   end
 end
