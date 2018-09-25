@@ -12,7 +12,10 @@ defmodule UiWeb.ResultChannel do
       type: check.type,
       address: check.address,
       status: status,
-      time: trunc(time)
+      time: time_if_ok(status, time)
     })
   end
+
+  defp time_if_ok(:ok, time), do: trunc(time)
+  defp time_if_ok(_, _), do: "—"
 end
