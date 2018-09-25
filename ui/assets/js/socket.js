@@ -20,8 +20,12 @@ channel.on("new_result", payload => {
   row.appendChild(createCell(payload.address))
   row.appendChild(createCell(payload.status))
   row.appendChild(createCell(payload.time))
-  var table = document.getElementById("results-table")
-  table.appendChild(row)
+  var existingRow = document.getElementById(id)
+  if (existingRow === null) {
+    document.querySelector("tbody").appendChild(row)
+  } else {
+    existingRow.parentNode.replaceChild(row, existingRow)
+  }
 })
 
 channel.join()
