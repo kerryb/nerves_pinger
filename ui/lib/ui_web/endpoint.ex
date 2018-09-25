@@ -1,7 +1,7 @@
 defmodule UiWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ui
 
-  socket "/socket", UiWeb.UserSocket
+  socket "/socket", UiWeb.ResultSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
