@@ -3,7 +3,7 @@ defmodule Pinger.Controller do
 
   alias Pinger.Check
 
-  @interval :timer.seconds(2)
+  @interval :timer.seconds(10)
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -14,10 +14,18 @@ defmodule Pinger.Controller do
     {:ok, %{checks: Check.all(), results: %{}}}
   end
 
+  def results do
+    GenServer.call(__MODULE__, :results)
+  end
+
   def handle_info(:tick, state) do
-    new_state = run_next_check(state) |> IO.inspect()
+    new_state = run_next_check(state)
     Process.send_after(self(), :tick, @interval)
     {:noreply, new_state}
+  end
+
+  def handle_call(:results, _from, state) do
+    {:reply, state.results, state}
   end
 
   defp run_next_check(%{checks: [check | _] = checks, results: results}) do

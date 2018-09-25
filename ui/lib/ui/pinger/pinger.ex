@@ -22,7 +22,7 @@ defmodule Pinger do
   end
 
   defp dns_query(host) do
-    :inet_res.gethostbyname(host)
+    :inet_res.getbyname(host, :a)
   end
 
   defp http_request(url) do
