@@ -3,7 +3,8 @@ defmodule UiWeb.PageController do
 
   def index(conn, _params) do
     conn
-    |> assign(:results, Pinger.Controller.results)
+    |> assign(:results, [])
+    # |> assign(:results, Pinger.Controller.results)
     |> render("index.html")
   end
 end

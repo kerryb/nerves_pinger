@@ -6,7 +6,7 @@ defmodule Pinger.Controller do
 
   @interval :timer.seconds(10)
 
-  def start_link do
+  def start_link(_args) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
@@ -31,7 +31,7 @@ defmodule Pinger.Controller do
 
   defp run_next_check(%{checks: [check | _] = checks, results: results}) do
     result = Check.run(check)
-    ResultChannel.new_result(check, result)
+    # ResultChannel.new_result(check, result)
     %{checks: move_head_to_back(checks), results: add_result(results, check, result)}
   end
 

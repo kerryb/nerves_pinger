@@ -1,4 +1,4 @@
-.PHONY: setup burn assets firmware burn upload
+.PHONY: setup burn assets firmware ui burn upload
 all: build upload
 setup:
 	export MIX_ENV=prod && \
@@ -6,7 +6,7 @@ setup:
 	  mix deps.get && \
 	  cd assets && \
 	  npm install
-build: assets firmware
+build: firmware ui
 assets:
 	export MIX_ENV=prod && \
 	  cd ui/assets && \
@@ -19,6 +19,11 @@ firmware:
 	  cd firmware && \
 	  mix deps.get && \
 	  mix firmware
+ui: assets
+	export MIX_ENV=prod && \
+	  cd ui && \
+	  mix deps.get && \
+	  mix
 burn:
 	export MIX_ENV=prod && \
 	  export MIX_TARGET=rpi2 && \

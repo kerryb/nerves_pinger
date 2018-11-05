@@ -10,7 +10,6 @@ defmodule Ui.Application do
     children = [
       # Start the endpoint when the application starts
       supervisor(UiWeb.Endpoint, []),
-      supervisor(Pinger.Controller, []),
       # Start your own worker by calling: Ui.Worker.start_link(arg1, arg2, arg3)
       # worker(Ui.Worker, [arg1, arg2, arg3]),
     ]
