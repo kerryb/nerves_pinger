@@ -1,7 +1,7 @@
-defmodule UiWeb.ResultChannel do
+defmodule UIWeb.ResultChannel do
   use Phoenix.Channel
 
-  alias UiWeb.Endpoint
+  alias UIWeb.Endpoint
 
   def join("results", _message, socket) do
     {:ok, socket}

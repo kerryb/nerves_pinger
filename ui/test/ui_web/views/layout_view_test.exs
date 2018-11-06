@@ -1,3 +1,3 @@
-defmodule UiWeb.LayoutViewTest do
-  use UiWeb.ConnCase, async: true
+defmodule UIWeb.LayoutViewTest do
+  use UIWeb.ConnCase, async: true
 end

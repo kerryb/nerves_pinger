@@ -1,3 +1,3 @@
-defmodule UiWeb.LayoutView do
-  use UiWeb, :view
+defmodule UIWeb.LayoutView do
+  use UIWeb, :view
 end

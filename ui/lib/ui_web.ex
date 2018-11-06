@@ -1,12 +1,12 @@
-defmodule UiWeb do
+defmodule UIWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use UiWeb, :controller
-      use UiWeb, :view
+      use UIWeb, :controller
+      use UIWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,17 +19,18 @@ defmodule UiWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: UiWeb
+      use Phoenix.Controller, namespace: UIWeb
       import Plug.Conn
-      import UiWeb.Router.Helpers
-      import UiWeb.Gettext
+      import UIWeb.Router.Helpers
+      import UIWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/ui_web/templates",
-                        namespace: UiWeb
+      use Phoenix.View,
+        root: "lib/ui_web/templates",
+        namespace: UIWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -37,9 +38,9 @@ defmodule UiWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import UiWeb.Router.Helpers
-      import UiWeb.ErrorHelpers
-      import UiWeb.Gettext
+      import UIWeb.Router.Helpers
+      import UIWeb.ErrorHelpers
+      import UIWeb.Gettext
     end
   end
 
@@ -54,7 +55,7 @@ defmodule UiWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import UiWeb.Gettext
+      import UIWeb.Gettext
     end
   end
 

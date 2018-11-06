@@ -1,4 +1,4 @@
-defmodule Ui.Results do
+defmodule UI.Results do
   use Agent
 
   def start_link() do

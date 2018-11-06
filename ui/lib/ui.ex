@@ -1,6 +1,6 @@
-defmodule Ui do
+defmodule UI do
   @moduledoc """
-  Ui keeps the contexts that define your domain
+  UI keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

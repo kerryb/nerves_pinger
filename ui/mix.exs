@@ -1,4 +1,4 @@
-defmodule Ui.Mixfile do
+defmodule UI.Mixfile do
   use Mix.Project
 
   def project do
@@ -18,7 +18,7 @@ defmodule Ui.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Ui.Application, []},
+      mod: {UI.Application, []},
       extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end

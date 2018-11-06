@@ -1,7 +1,7 @@
-defmodule UiWeb.Endpoint do
+defmodule UIWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ui
 
-  socket "/socket", UiWeb.ResultSocket
+  socket "/socket", UIWeb.ResultSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -37,7 +37,7 @@ defmodule UiWeb.Endpoint do
     key: "_ui_key",
     signing_salt: "LuynXzmf"
 
-  plug UiWeb.Router
+  plug UIWeb.Router
 
   @doc """
   Callback invoked for dynamically configuring the endpoint.
