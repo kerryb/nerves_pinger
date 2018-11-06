@@ -7,15 +7,7 @@ defmodule UIWeb.ResultChannel do
     {:ok, socket}
   end
 
-  def new_result(check, result) do
-    Endpoint.broadcast!("results", "new_result", %{
-      type: check.type,
-      address: check.address,
-      status: result.status,
-      time: time_if_ok(result)
-    })
+  def new_result(params) do
+    Endpoint.broadcast!("results", "new_result", params)
   end
-
-  defp time_if_ok(%{status: :ok, time: time}), do: trunc(time)
-  defp time_if_ok(_, _), do: "—"
 end
