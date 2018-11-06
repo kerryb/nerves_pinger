@@ -13,6 +13,7 @@ function createCell(text) {
 }
 
 channel.on("new_result", payload => {
+  console.log(payload);
   var id = `${payload.type}-${payload.address}`
   var row = document.createElement("tr")
   row.id = id
