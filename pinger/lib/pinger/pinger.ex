@@ -26,6 +26,14 @@ defmodule Pinger do
   end
 
   defp http_request(url) do
-    HTTPoison.get(url, [], hackney: [insecure: true])
+    with %{status_code: status} <- HTTPotion.get(url) do
+      if status < 400 do
+        {:ok, status}
+      else
+        {:error, status}
+      end
+    else
+      %HTTPotion.ErrorResponse{message: message} -> {:error, message}
+    end
   end
 end

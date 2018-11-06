@@ -14,10 +14,12 @@ assets:
 	  cd ../ && \
 	  mix phx.digest
 firmware:
+	# Compiling certifi because of https://github.com/benoitc/hackney/issues/528
 	export MIX_ENV=prod && \
 	  export MIX_TARGET=rpi2 && \
 	  cd firmware && \
 	  mix deps.get && \
+	  mix deps.compile certifi && \
 	  mix firmware
 ui: assets
 	export MIX_ENV=prod && \
