@@ -1,5 +1,5 @@
 .PHONY: setup firmware burn upload
-all: firmware upload
+all: firmware
 setup:
 	export MIX_ENV=prod && \
 	  cd ui && \

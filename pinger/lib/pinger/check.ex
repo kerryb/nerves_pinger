@@ -6,7 +6,8 @@ defmodule Pinger.Check do
     dns: "github.com",
     http: "https://github.com",
     http: "https://bt.com",
-    dns: "apple.com"
+    dns: "apple.com",
+    dns: "guardian.com"
   ]
 
   def all do

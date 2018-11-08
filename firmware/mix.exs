@@ -30,14 +30,16 @@ defmodule Firmware.MixProject do
   def application do
     [
       mod: {Firmware.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpotion]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:httpotion, "~> 3.1"},
       {:nerves, "~> 1.3", runtime: false},
+      {:nerves_firmware, "~> 0.4"},
       {:ring_logger, "~> 0.6"},
       {:pinger, path: "../pinger"}
     ] ++ deps(@target)
