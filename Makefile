@@ -1,4 +1,4 @@
-.PHONY: setup firmware burn upload
+.PHONY: setup firmware burn upload publish
 all: firmware
 setup:
 	export MIX_ENV=prod && \
@@ -22,3 +22,6 @@ upload:
 	  export MIX_TARGET=rpi2 && \
 	  cd firmware && \
 	  ./upload.sh
+
+publish:
+	cp firmware/_build/rpi2/rpi2_prod/nerves/images/firmware.fw ui/assets/static
