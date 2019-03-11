@@ -21,7 +21,7 @@ upload:
 	export MIX_ENV=prod && \
 	  export MIX_TARGET=rpi2 && \
 	  cd firmware && \
-	  ./upload.sh
+	  ./upload.sh nerves.local _build/rpi2/rpi2_prod/nerves/images/firmware.fw
 
 publish:
 	cp firmware/_build/rpi2/rpi2_prod/nerves/images/firmware.fw ui/assets/static
