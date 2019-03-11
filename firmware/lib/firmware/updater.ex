@@ -1,5 +1,6 @@
 defmodule Firmware.Updater do
   use GenServer
+  require Logger
 
   @interval :timer.seconds(10)
   @firmware_url "http://192.168.2.1:4000/firmware.fw"
@@ -21,10 +22,12 @@ defmodule Firmware.Updater do
   def handle_info(_, state), do: {:noreply, state}
 
   defp check_for_new_firmware(%{etag: old_etag}) do
+    Logger.debug("Checking for new firmware")
     response = HTTPotion.head(@firmware_url)
     new_etag = response.headers[:etag]
 
     if should_update?(old_etag, new_etag) do
+      Logger.info("New firmware found")
       download_firmware()
       update_and_reboot()
     else
@@ -43,6 +46,7 @@ defmodule Firmware.Updater do
   end
 
   def download_firmware do
+    Logger.debug("Downloading firmware")
     HTTPotion.get(@firmware_url, stream_to: self(), timeout: :timer.minutes(5))
     receive_data()
   end
@@ -50,22 +54,24 @@ defmodule Firmware.Updater do
   defp receive_data(file \\ File.open!(@firmware_file, [:write])) do
     receive do
       %HTTPotion.AsyncHeaders{} ->
-        IO.puts("Received headers")
+        Logger.debug("Received headers")
         receive_data(file)
 
       %HTTPotion.AsyncChunk{chunk: chunk} ->
-        IO.puts("Received chunk")
+        Logger.debug("Received chunk")
         IO.binwrite(file, chunk)
         receive_data(file)
 
       %HTTPotion.AsyncEnd{} ->
-        IO.puts("complete")
+        Logger.info("Download complete")
         File.close(file)
     end
   end
 
   def update_and_reboot do
-    Nerves.Firmware.apply(@firmware_file, "complete")
+    Logger.info("Applying new firmware")
+    Nerves.Firmware.apply(@firmware_file, :complete)
+    Logger.info("Rebooting")
     Nerves.Firmware.reboot()
   end
 end
