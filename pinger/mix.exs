@@ -23,7 +23,8 @@ defmodule Pinger.MixProject do
   defp deps do
     [
       {:poison, "~> 3.1"},
-      {:httpotion, "~> 3.1"}
+      {:httpotion, "~> 3.1"},
+      {:timex, "~> 3.5"}
     ]
   end
 end

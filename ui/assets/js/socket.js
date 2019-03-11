@@ -19,6 +19,7 @@ channel.on("new_result", payload => {
   row.id = id
   row.appendChild(createCell(payload.type))
   row.appendChild(createCell(payload.address))
+  row.appendChild(createCell(payload.timestamp))
   row.appendChild(createCell(payload.status))
   row.appendChild(createCell(payload.time))
   var existingRow = document.getElementById(id)

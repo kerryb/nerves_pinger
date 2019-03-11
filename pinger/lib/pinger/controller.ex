@@ -27,7 +27,13 @@ defmodule Pinger.Controller do
     HTTPotion.post(
       "http://192.168.2.1:4000/api/results",
       body:
-        Poison.encode!(%{type: check.type, address: check.address, status: status, time: time}),
+        Poison.encode!(%{
+          type: check.type,
+          address: check.address,
+          status: status,
+          time: time,
+          timestamp: DateTime.utc_now() |> Timex.format!("{WDshort} {h24}:{m}:{s}")
+        }),
       headers: [{"Content-Type", "application/json"}]
     )
 

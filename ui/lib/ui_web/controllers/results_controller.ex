@@ -4,7 +4,8 @@ defmodule UIWeb.ResultController do
   def create(conn, params) do
     UI.Results.record_result(%{type: params["type"], address: params["address"]}, %{
       status: params["status"],
-      time: params["time"]
+      time: params["time"],
+      timestamp: params["timestamp"]
     })
 
     UIWeb.ResultChannel.new_result(params)

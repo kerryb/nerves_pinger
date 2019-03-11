@@ -54,16 +54,13 @@ defmodule Firmware.Updater do
   defp receive_data(file \\ File.open!(@firmware_file, [:write])) do
     receive do
       %HTTPotion.AsyncHeaders{} ->
-        Logger.debug("Received headers")
         receive_data(file)
 
       %HTTPotion.AsyncChunk{chunk: chunk} ->
-        Logger.debug("Received chunk")
         IO.binwrite(file, chunk)
         receive_data(file)
 
       %HTTPotion.AsyncEnd{} ->
-        Logger.info("Download complete")
         File.close(file)
     end
   end
