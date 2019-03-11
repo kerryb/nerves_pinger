@@ -50,9 +50,10 @@ defmodule Firmware.MixProject do
 
   defp deps(target) do
     [
-      {:shoehorn, "~> 0.4"},
+      {:nerves_init_gadget, "~> 0.4"},
       {:nerves_runtime, "~> 0.6"},
-      {:nerves_init_gadget, "~> 0.4"}
+      {:nerves_time, "~> 0.2"},
+      {:shoehorn, "~> 0.4"}
     ] ++ system(target)
   end
 
