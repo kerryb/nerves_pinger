@@ -18,14 +18,14 @@ defmodule Firmware.Application do
   def children("host") do
     [
       # Starts a worker by calling: Firmware.Worker.start_link(arg)
-      {Firmware.Updater, []},
+      # {Firmware.Worker, arg},
     ]
   end
 
   def children(_target) do
     [
       # Starts a worker by calling: Firmware.Worker.start_link(arg)
-      # {Firmware.Worker, arg},
+      {Firmware.Updater, []}
     ]
   end
 end
