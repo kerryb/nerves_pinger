@@ -70,7 +70,12 @@ defmodule Firmware.Updater do
 
   def update_and_reboot do
     Logger.info("Applying new firmware")
-    Nerves.Firmware.apply(@firmware_file, :complete)
+    # This should work, but doesn't.
+    # Nerves.Firmware.apply(@firmware_file, :complete)
+    device = Application.get_env(:nerves_firmware, :device, "/dev/mmcblk0")
+    fwup_args = ["-aqU", "--no-eject", "-i", @firmware_file, "-d", device, "-t", "complete"]
+    {_, 0} = System.cmd("fwup", fwup_args)
+
     Logger.info("Rebooting")
     Nerves.Firmware.reboot()
   end
