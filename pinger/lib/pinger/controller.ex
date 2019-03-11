@@ -3,7 +3,7 @@ defmodule Pinger.Controller do
 
   alias Pinger.Check
 
-  @interval :timer.seconds(10)
+  @interval :timer.seconds(1)
 
   def start_link(_args) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
