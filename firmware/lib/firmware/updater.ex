@@ -31,6 +31,7 @@ defmodule Firmware.Updater do
       download_firmware()
       update_and_reboot()
     else
+      clear_flash_message()
       Process.send_after(self(), :tick, @interval)
     end
 
@@ -47,6 +48,7 @@ defmodule Firmware.Updater do
 
   def download_firmware do
     Logger.debug("Downloading firmware")
+    post_flash_message("Downloading new firmware …")
     HTTPotion.get(@firmware_url, stream_to: self(), timeout: :timer.minutes(5))
     receive_data()
   end
@@ -67,13 +69,29 @@ defmodule Firmware.Updater do
 
   def update_and_reboot do
     Logger.info("Applying new firmware")
+    post_flash_message("Applying new firmware …")
+
     # This should work, but doesn't.
     # Nerves.Firmware.apply(@firmware_file, :complete)
+
     device = Application.get_env(:nerves_firmware, :device, "/dev/mmcblk0")
     fwup_args = ["-aqU", "--no-eject", "-i", @firmware_file, "-d", device, "-t", "complete"]
     {_, 0} = System.cmd("fwup", fwup_args)
 
     Logger.info("Rebooting")
+    post_flash_message("Rebooting …")
     Nerves.Firmware.reboot()
+  end
+
+  defp post_flash_message(message) do
+    HTTPotion.post(
+      "http://192.168.2.1:4000/api/flash",
+      body: Poison.encode!(%{message: message}),
+      headers: [{"Content-Type", "application/json"}]
+    )
+  end
+
+  defp clear_flash_message do
+    HTTPotion.delete("http://192.168.2.1:4000/api/flash")
   end
 end

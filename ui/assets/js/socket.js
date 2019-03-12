@@ -4,7 +4,8 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
-let channel = socket.channel("results", {})
+let results_channel = socket.channel("results", {})
+let info_channel = socket.channel("info", {})
 
 function createCell(text) {
   var cell = document.createElement("td")
@@ -12,8 +13,7 @@ function createCell(text) {
   return cell
 }
 
-channel.on("new_result", payload => {
-  console.log(payload);
+results_channel.on("new_result", payload => {
   var id = `${payload.type}-${payload.address}`
   var row = document.createElement("tr")
   row.id = id
@@ -30,8 +30,22 @@ channel.on("new_result", payload => {
   }
 })
 
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+info_channel.on("message", payload => {
+  var flash = document.getElementById("flash-info")
+  flash.textContent = payload.message
+})
+
+info_channel.on("clear", payload => {
+  var flash = document.getElementById("flash-info")
+  flash.textContent = ""
+})
+
+results_channel.join()
+  .receive("ok", resp => { console.log("Joined results channel", resp) })
+  .receive("error", resp => { console.log("Unable to join results channel", resp) })
+
+info_channel.join()
+  .receive("ok", resp => { console.log("Joined info channel", resp) })
+  .receive("error", resp => { console.log("Unable to join info channel", resp) })
 
 export default socket

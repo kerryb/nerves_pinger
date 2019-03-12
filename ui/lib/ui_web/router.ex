@@ -22,5 +22,7 @@ defmodule UIWeb.Router do
   scope "/api", UIWeb do
   pipe_through :api
     post "/results", ResultController, :create
+    post "/flash", FlashController, :create
+    delete "/flash", FlashController, :delete
   end
 end
