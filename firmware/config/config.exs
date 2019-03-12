@@ -47,6 +47,8 @@ config :nerves_firmware_ssh,
 config :logger, backends: [RingLogger]
 config :logger, level: :debug
 
+config :tzdata, data_dir: "/root/tzdata"
+
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 # Uncomment to use target specific configurations
