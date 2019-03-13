@@ -27,3 +27,7 @@ upload:
 
 publish:
 	cp firmware/_build/rpi2/rpi2_prod/nerves/images/firmware.fw ui/assets/static
+stats:
+	cloc pinger/lib
+	cloc updater/lib
+	cloc ui/lib
