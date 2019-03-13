@@ -13,7 +13,7 @@
         <td><%= check.address %></td>
         <td><%= result.timestamp %></td>
         <td><%= result.status %></td>
-        <td><%= if result.status == :ok, do: trunc(result.time), else: "—" %></td>
+        <td><%= if result.status == "ok", do: trunc(result.time), else: "—" %></td>
       </tr>
     <% end %>
   </tbody>
