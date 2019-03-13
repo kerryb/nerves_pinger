@@ -4,7 +4,7 @@
 ##  The cookie needs to be configured prior to vm boot for
 ##  for read only filesystem.
 
-# -name firmware@0.0.0.0
+-name firmware@192.168.2.2
 -setcookie dRBxXEZl/sBkx/BdI4rX7IXyQJwF0oLoR3PqIMq+8WFqy8PsThg9V1i97Jn6xdCT
 
 ## Use Ctrl-C to interrupt the current shell rather than invoking the emulator's

@@ -1,4 +1,4 @@
-defmodule Firmware.Updater do
+defmodule Updater.Controller do
   use GenServer
   require Logger
 
@@ -11,7 +11,7 @@ defmodule Firmware.Updater do
   end
 
   def init(_args) do
-    send(self(), :tick)
+    Process.send_after(self(), :tick, @interval)
     {:ok, %{etag: nil}}
   end
 
@@ -23,8 +23,11 @@ defmodule Firmware.Updater do
 
   defp check_for_new_firmware(%{etag: old_etag}) do
     Logger.debug("Checking for new firmware")
-    response = HTTPotion.head(@firmware_url)
-    new_etag = response.headers[:etag]
+    @firmware_url |> HTTPotion.head() |> check_etag(old_etag)
+  end
+
+  defp check_etag(%{headers: headers, status_code: 200}, old_etag) do
+    new_etag = headers[:etag]
 
     if should_update?(old_etag, new_etag) do
       Logger.info("New firmware found")
@@ -36,6 +39,12 @@ defmodule Firmware.Updater do
     end
 
     %{etag: new_etag}
+  end
+
+  defp check_etag(response, old_etag) do
+    Logger.warn("Check failed: #{inspect(response)}")
+    Process.send_after(self(), :tick, @interval)
+    %{etag: old_etag}
   end
 
   def should_update?(nil = _old_etag, _new_etag) do

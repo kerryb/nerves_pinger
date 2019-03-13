@@ -25,7 +25,7 @@ defmodule Firmware.Application do
   def children(_target) do
     [
       # Starts a worker by calling: Firmware.Worker.start_link(arg)
-      {Firmware.Updater, []}
+      # {Firmware.Worker, arg},
     ]
   end
 end

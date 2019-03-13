@@ -1,11 +1,11 @@
-defmodule Pinger.MixProject do
+defmodule Updater.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :pinger,
+      app: :updater,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -15,7 +15,7 @@ defmodule Pinger.MixProject do
   def application do
     [
       extra_applications: [:logger, :httpotion, :poison],
-      mod: {Pinger.Application, []}
+      mod: {Updater.Application, []}
     ]
   end
 
@@ -23,8 +23,7 @@ defmodule Pinger.MixProject do
   defp deps do
     [
       {:httpotion, "~> 3.1"},
-      {:poison, "~> 3.1"},
-      {:timex, "~> 3.5"}
+      {:poison, "~> 3.1"}
     ]
   end
 end
