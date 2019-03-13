@@ -6,6 +6,8 @@ setup:
 	  mix deps.get && \
 	  cd assets && \
 	  npm install
+clean:
+	rm -rf {firmware,pinger,updated}/_build
 firmware:
 	export MIX_ENV=prod && \
 	  export MIX_TARGET=rpi2 && \
