@@ -8,8 +8,6 @@ defmodule UIWeb.ResultController do
       timestamp: params["timestamp"]
     })
 
-    UIWeb.ResultChannel.new_result(params)
-
     conn
     |> put_status(:created)
     |> json(%{})

@@ -2,7 +2,14 @@ defmodule UIWeb.ResultsLive do
   use Phoenix.LiveView
 
   def mount(_session, socket) do
-    {:ok, assign(socket, results: UI.Results.all())}
+    socket = assign(socket, results: UI.Results.all())
+
+    if connected?(socket) do
+      pid = self()
+      UI.Results.subscribe(fn results -> send(pid, {:update, results}) end)
+    end
+
+    {:ok, socket}
   end
 
   def render(assigns) do
@@ -28,5 +35,9 @@ defmodule UIWeb.ResultsLive do
       </tbody>
     </table>
     """
+  end
+
+  def handle_info({:update, results}, socket) do
+    {:noreply, update(socket, :results, fn _ -> results end)}
   end
 end
