@@ -21,8 +21,9 @@ defmodule UIWeb do
     quote do
       use Phoenix.Controller, namespace: UIWeb
       import Plug.Conn
-      import UIWeb.Router.Helpers
       import UIWeb.Gettext
+
+      alias UIWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -38,9 +39,10 @@ defmodule UIWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import UIWeb.Router.Helpers
       import UIWeb.ErrorHelpers
       import UIWeb.Gettext
+
+      alias UIWeb.Router.Helpers, as: Routes
     end
   end
 

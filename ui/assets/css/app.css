@@ -1,1 +1,5 @@
 /* This file is for your main application css. */
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.alert:empty { display: none; }

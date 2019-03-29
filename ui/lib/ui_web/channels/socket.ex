@@ -4,8 +4,6 @@ defmodule UIWeb.Socket do
   channel("results", UIWeb.ResultChannel)
   channel("info", UIWeb.InfoChannel)
 
-  transport(:websocket, Phoenix.Transports.WebSocket, check_origin: false)
-
   def connect(_params, socket) do
     {:ok, socket}
   end

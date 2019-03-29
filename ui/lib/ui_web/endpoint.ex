@@ -1,7 +1,10 @@
 defmodule UIWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ui
 
-  socket("/socket", UIWeb.Socket)
+  socket("/socket", UIWeb.Socket,
+    websocket: true,
+    longpoll: [check_origin: false]
+  )
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -27,7 +30,7 @@ defmodule UIWeb.Endpoint do
   plug(Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Jason
   )
 
   plug(Plug.MethodOverride)
