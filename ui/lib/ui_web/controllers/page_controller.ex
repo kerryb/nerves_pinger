@@ -2,9 +2,6 @@ defmodule UIWeb.PageController do
   use UIWeb, :controller
 
   def index(conn, _params) do
-    conn
-    |> assign(:results, [])
-    |> assign(:results, UI.Results.all())
-    |> render("index.html")
+    Phoenix.LiveView.Controller.live_render(conn, UIWeb.ResultsLive, session: %{})
   end
 end
