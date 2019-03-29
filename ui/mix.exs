@@ -35,9 +35,10 @@ defmodule UI.Mixfile do
       {:gettext, "~> 0.11"},
       {:httpoison, "~> 1.0"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4.0", override: true},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
       {:phoenix_pubsub, "~> 1.0"},
       {:plug, "~> 1.7"},
       {:plug_cowboy, "~> 2.0"}

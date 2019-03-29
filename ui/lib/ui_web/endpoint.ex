@@ -5,6 +5,7 @@ defmodule UIWeb.Endpoint do
     websocket: true,
     longpoll: [check_origin: false]
   )
+  socket("/live", Phoenix.LiveView.Socket)
 
   # Serve at "/" the static files from "priv/static" directory.
   #

@@ -41,6 +41,7 @@ defmodule UIWeb do
 
       import UIWeb.ErrorHelpers
       import UIWeb.Gettext
+      import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
 
       alias UIWeb.Router.Helpers, as: Routes
     end
@@ -51,6 +52,7 @@ defmodule UIWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
